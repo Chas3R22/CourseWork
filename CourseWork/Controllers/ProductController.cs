@@ -15,19 +15,19 @@ namespace CourseWork.Api.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<GetProductDto>>> Get()
+        public async Task<ActionResult<ResponseService<List<GetProductDto>>>> Get()
         {
             return Ok(await _productService.GetAllProducts());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetProductDto>> GetSingle(int id)
+        public async Task<ActionResult<ResponseService<GetProductDto>>> GetSingle(int id)
         {
             return Ok(await _productService.GetProductById(id));
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<GetProductDto>>> AddProduct(AddProductDto newProduct)
+        public async Task<ActionResult<ResponseService<List<GetProductDto>>>> AddProduct(AddProductDto newProduct)
         {
             return Ok(await _productService.AddProduct(newProduct));
         }

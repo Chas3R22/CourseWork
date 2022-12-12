@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseWork.Domain.Models
 {
-    public class Category : BaseModel
+    public class Category
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

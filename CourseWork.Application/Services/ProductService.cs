@@ -22,20 +22,29 @@ namespace CourseWork.Application.Services
         {
             _mapper = mapper;
         }
-        public async Task<List<GetProductDto>> AddProduct(AddProductDto newProduct)
+        public async Task<ResponseService<List<GetProductDto>>> AddProduct(AddProductDto newProduct)
         {
-            products.Add(newProduct);
-            return products;
+            var responseService = new ResponseService<List<GetProductDto>>();
+            Product product = _mapper.Map<Product>(newProduct);
+            products.Add(product);
+            responseService.Data = products.Select(_mapper.Map<GetProductDto>).ToList();
+            return responseService;
         }
 
-        public async Task<List<GetProductDto>> GetAllProducts()
+        public async Task<ResponseService<List<GetProductDto>>> GetAllProducts()
         {
-            return products;
+            return new ResponseService<List<GetProductDto>> 
+            { 
+                Data = products.Select(p => _mapper.Map<GetProductDto>(p)).ToList()
+            };
         }
 
-        public async Task<GetProductDto> GetProductById(int id)
+        public async Task<ResponseService<GetProductDto>> GetProductById(int id)
         {
-            return products.FirstOrDefault(p => p.Id == id);
+            var responseService = new ResponseService<GetProductDto>();
+            var product = products.FirstOrDefault(x => x.Id == id);
+            responseService.Data = _mapper.Map<GetProductDto>(product);
+            return responseService;
         }
     }
 }

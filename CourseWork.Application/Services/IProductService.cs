@@ -10,10 +10,8 @@ namespace CourseWork.Application.Services
 {
     public interface IProductService
     {
-        Task<List<GetProductDto>> GetAllProducts();
-        Task<GetProductDto> GetProductById(int id);
-        Task<List<GetProductDto>> AddProduct(AddProductDto newProduct);
-
-
+        Task<ResponseService<List<GetProductDto>>> GetAllProducts();
+        Task<ResponseService<GetProductDto>> GetProductById(int id);
+        Task<ResponseService<List<GetProductDto>>> AddProduct(AddProductDto newProduct);
     }
 }

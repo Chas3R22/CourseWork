@@ -14,6 +14,7 @@ namespace CourseWork.Application.Mapper
         public AutoMapperProfile()
         {
             CreateMap<Product, GetProductDto>();
+            CreateMap<AddProductDto, Product>();
         }
     }
 }

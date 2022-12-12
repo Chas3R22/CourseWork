@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace CourseWork.Domain.Models
 {
-    public class Order : BaseModel
+    public class Order
     {
+        public int Id { get; set; }
         public string ProductName { get; set; }
         public string ClientName { get; set; }
         public string Location { get; set; }
