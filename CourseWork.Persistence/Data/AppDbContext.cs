@@ -14,6 +14,11 @@ namespace CourseWork.Persistence.Data
             : base(options)
         { }
 
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Industry> Industries { get; set; }
+        public DbSet<Country> Countries { get; set; }
+
+
+
     }
 }

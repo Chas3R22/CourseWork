@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace CourseWork.Domain.Models
 {
-    public class Client
+    public class Industry
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Location { get; set; }
-        public string Billing { get; set; }
+        public string Name { get; set; }
+        public ICollection<Organization> Products { get; set; }
     }
 }
+

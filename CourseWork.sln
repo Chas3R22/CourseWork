@@ -11,7 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseWork.Domain", "Course
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseWork.Infrastructure", "CourseWork.Infrastructure\CourseWork.Infrastructure.csproj", "{2C385F0B-D499-451F-8FCF-5DF39FDA78CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseWork.Persistence", "CourseWork.Persistence\CourseWork.Persistence.csproj", "{9499E46F-FAA5-432C-83C5-7928CF6A8158}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseWork.Persistence", "CourseWork.Persistence\CourseWork.Persistence.csproj", "{9499E46F-FAA5-432C-83C5-7928CF6A8158}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E872AA5F-0ACC-4487-8721-50391D790B94} = {E872AA5F-0ACC-4487-8721-50391D790B94}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CourseWork.Application.Dtos.Product;
+using CourseWork.Application.Dtos.Organization;
 using CourseWork.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -13,8 +13,9 @@ namespace CourseWork.Application.Mapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<Product, GetProductDto>();
-            CreateMap<AddProductDto, Product>();
+            CreateMap<Organization, GetOrganizationDto>();
+            CreateMap<AddOrganizationDto, Organization>();
+            CreateMap<UpdateOrganizationDto, Organization>();
         }
     }
 }

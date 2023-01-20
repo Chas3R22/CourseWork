@@ -20,7 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CourseWork.Application\CourseWork.Application.csproj" />
     <ProjectReference Include="..\CourseWork.Domain\CourseWork.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\Implementations\" />
   </ItemGroup>
 
 </Project>

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseWork.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221219100127_CreateInitial")]
-    partial class CreateInitial
+    [Migration("20230106193939_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace CourseWork.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CourseWork.Domain.Models.Product", b =>
@@ -51,10 +51,6 @@ namespace CourseWork.Persistence.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -73,12 +69,17 @@ namespace CourseWork.Persistence.Migrations
             modelBuilder.Entity("CourseWork.Domain.Models.Product", b =>
                 {
                     b.HasOne("CourseWork.Domain.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("CourseWork.Domain.Models.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
