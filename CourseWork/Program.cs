@@ -1,4 +1,4 @@
-using CourseWork.Application.Services;
+using CourseWork.Application.Services.Implementations;
 using CourseWork.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IProductService, OrganizationService>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 
 var app = builder.Build();
 
