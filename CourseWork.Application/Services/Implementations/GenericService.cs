@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CourseWork.Application.Services.Interfaces;
+using CourseWork.Infrastructure.Exceptions;
 using CourseWork.Persistence.Repositories.Interfaces;
+using LazyCache;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,42 +14,61 @@ namespace CourseWork.Application.Services.Implementations
     public class GenericService<TEntity> : IGenericService<TEntity> where TEntity : class
     {
         protected readonly IGenericRepository<TEntity> _repository;
-        protected readonly IMapper _mapper;
+        protected readonly IAppCache _cache;
 
-        public GenericService(IGenericRepository<TEntity> repository, IMapper mapper)
+        public GenericService(IGenericRepository<TEntity> repository, IAppCache cache)
         {
             _repository = repository;
-            _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<TEntity> GetByIdAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
+            if (entity == null)
+            {
+                throw new DataNotFoundException($"{typeof(TEntity).Name} with id {id} doesn't exist!");
+            }
+
+            return entity;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             var entities = await _repository.GetAllAsync();
-            return _mapper.Map<IEnumerable<TDto>>(entities);
+            return entities;
         }
 
         public async Task AddAsync(TEntity entity)
         {
             await _repository.AddAsync(entity);
-            return _mapper.Map<TDto>(entity);
+            _cache.Remove(typeof(TEntity).Name);
         }
 
-        public async Task<TEntity> UpdateAsync(int id)
+        public async Task UpdateAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
             await _repository.UpdateAsync(entity);
-            return _mapper.Map<TDto>(entity);
+            _cache.Remove(typeof(TEntity).Name);
         }
 
         public async Task DeleteAsync(int id)
         {
             var entity = await _repository.GetByIdAsync(id);
             await _repository.DeleteAsync(entity);
+            _cache.Remove(typeof(TEntity).Name);
+        }
+
+        private async Task<IEnumerable<TEntity>> GetCached()
+        {
+            if (_cache.TryGetValue<IEnumerable<TEntity>>(typeof(TEntity).Name, out var result))
+            {
+                return result;
+            }
+
+            var entities = await _repository.TakeRecords(100);
+            _cache.Add(typeof(TEntity).Name, entities, DateTimeOffset.Now.AddMinutes(10));
+            return entities;
         }
     }
 }

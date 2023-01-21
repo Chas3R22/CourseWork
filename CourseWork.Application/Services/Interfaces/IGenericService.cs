@@ -11,7 +11,7 @@ namespace CourseWork.Application.Services.Interfaces
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task AddAsync(TEntity entity);
-        Task<TEntity> UpdateAsync(int id);
+        Task UpdateAsync(int id);
         Task DeleteAsync(int id);
     }
 }

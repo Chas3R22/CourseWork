@@ -45,5 +45,10 @@ namespace CourseWork.Persistence.Repositories.Implementations
             _dbContext.Set<T>().Update(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<T>> TakeRecords(int n)
+        {
+            return await _dbContext.Set<T>().Take(n).ToListAsync();
+        }
     }
 }
