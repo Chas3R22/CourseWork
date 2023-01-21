@@ -15,11 +15,13 @@ namespace CourseWork.Application.Services.Implementations
     {
         protected readonly IGenericRepository<TEntity> _repository;
         protected readonly IAppCache _cache;
+        protected readonly IMapper _mapper;
 
-        public GenericService(IGenericRepository<TEntity> repository, IAppCache cache)
+        public GenericService(IGenericRepository<TEntity> repository, IAppCache cache, IMapper mapper)
         {
             _repository = repository;
             _cache = cache;
+            _mapper = mapper;
         }
 
         public async Task<TEntity> GetByIdAsync(int id)
@@ -45,9 +47,8 @@ namespace CourseWork.Application.Services.Implementations
             _cache.Remove(typeof(TEntity).Name);
         }
 
-        public async Task UpdateAsync(int id)
+        public async Task UpdateAsync(TEntity entity)
         {
-            var entity = await _repository.GetByIdAsync(id);
             await _repository.UpdateAsync(entity);
             _cache.Remove(typeof(TEntity).Name);
         }
