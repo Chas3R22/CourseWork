@@ -1,6 +1,9 @@
+using CourseWork.Api;
 using CourseWork.Application.Services.Implementations;
 using CourseWork.Application.Services.Interfaces;
 using CourseWork.Persistence.Data;
+using CourseWork.Persistence.Repositories.Implementations;
+using CourseWork.Persistence.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +20,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// builder.Services.CustomServices();
+
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<IIndustryRepository, IndustryRepository>();
+builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<ICountryService, CountryService>();
+
 
 var app = builder.Build();
 

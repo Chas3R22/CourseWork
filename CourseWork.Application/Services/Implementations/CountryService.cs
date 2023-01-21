@@ -16,7 +16,7 @@ namespace CourseWork.Application.Services.Implementations
     public class CountryService : GenericService<Country>, ICountryService
     {
         
-        public CountryService(IGenericRepository<Country> repository, IAppCache cache, IMapper mapper) : base(repository, cache, mapper)
+        public CountryService(ICountryRepository repository, IAppCache cache, IMapper mapper) : base(repository, cache, mapper)
         {
         }
 
@@ -32,14 +32,14 @@ namespace CourseWork.Application.Services.Implementations
 
         public async Task<ResponseCountryDto> AddAsync(CrudCountryDto addDto)
         {
-            Country country = _mapper.Map<Country>(addDto);
+            var country = _mapper.Map<Country>(addDto);
             await base.AddAsync(country);
             return _mapper.Map<ResponseCountryDto>(country);
         }
 
         public async Task<ResponseCountryDto> UpdateAsync(CrudCountryDto updateDto, int id)
         {
-            Country country = await base.GetByIdAsync(id);
+            var country = await base.GetByIdAsync(id);
             _mapper.Map(updateDto, country);
             await base.UpdateAsync(country);
             return _mapper.Map<ResponseCountryDto>(country);

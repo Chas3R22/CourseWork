@@ -16,27 +16,27 @@ namespace CourseWork.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            return Ok(_countryService.GetByIdAsync(id));
+            return Ok(await _countryService.GetByIdAsync(id));
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] CrudCountryDto createDto)
+        public async Task<IActionResult> Create([FromBody] CrudCountryDto createDto)
         {
-            return Ok(_countryService.AddAsync(createDto));
+            return Ok(await _countryService.AddAsync(createDto));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] CrudCountryDto updateDto)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CrudCountryDto updateDto)
         {
-            return Ok(_countryService.UpdateAsync(updateDto, id));
+            return Ok(await _countryService.UpdateAsync(updateDto, id));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            _countryService.DeleteAsync(id);
+            await _countryService.DeleteAsync(id);
             return NoContent();
         }
     }
