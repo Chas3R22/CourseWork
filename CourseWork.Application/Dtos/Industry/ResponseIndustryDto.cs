@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseWork.Application.Dtos.Country
+namespace CourseWork.Application.Dtos.Industry
 {
-    public class ResponseCountryDto
+    public class ResponseIndustryDto
     {
         public string Name { get; set; }
 

@@ -22,7 +22,7 @@ namespace CourseWork.Application.Services.Implementations
 
         public async new Task<ResponseCountryDto> GetByIdAsync(int id)
         {
-            return _mapper.Map<ResponseCountryDto>(base.GetByIdAsync(id));
+            return _mapper.Map<ResponseCountryDto>(await base.GetByIdAsync(id));
         }
 
         public async Task<Country> GetEntityByIdAsync(int id)

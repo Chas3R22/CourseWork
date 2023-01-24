@@ -25,7 +25,9 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IIndustryRepository, IndustryRepository>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
+        
 builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IIndustryService, IndustryService>();
 
 
 var app = builder.Build();

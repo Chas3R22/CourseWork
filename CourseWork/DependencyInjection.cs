@@ -14,6 +14,7 @@ namespace CourseWork.Api
             // services.AddScoped<IOrganizationRepository, OrganizationRepository>();
             // 
             // services.AddScoped<ICountryService, CountryService>();
+            // services.AddScoped<IIndustryService, IndustryService>();
         }
     }
 }

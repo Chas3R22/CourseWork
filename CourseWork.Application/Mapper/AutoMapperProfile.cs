@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CourseWork.Application.Dtos;
 using CourseWork.Application.Dtos.Country;
+using CourseWork.Application.Dtos.Industry;
 using CourseWork.Application.Dtos.Organization;
 using CourseWork.Domain.Models;
 using System;
@@ -17,6 +18,9 @@ namespace CourseWork.Application.Mapper
         {
             CreateMap<CrudCountryDto, Country>();
             CreateMap<Country, ResponseCountryDto>();
+
+            CreateMap<CrudIndustryDto, Industry>();
+            CreateMap<Industry, ResponseIndustryDto>();
 
             // CreateMap<Organization, GetOrganizationDto>();
             // CreateMap<AddOrganizationDto, Organization>();
