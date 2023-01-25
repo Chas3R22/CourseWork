@@ -1,4 +1,4 @@
-﻿using CourseWork.Application.Dtos.Industry;
+﻿using CourseWork.Application.Dtos.IndustryDto;
 using CourseWork.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

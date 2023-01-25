@@ -1,4 +1,4 @@
-﻿using CourseWork.Application.Dtos.Industry;
+﻿using CourseWork.Application.Dtos.IndustryDto;
 using CourseWork.Domain.Models;
 using System;
 using System.Collections.Generic;

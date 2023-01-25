@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CourseWork.Application.Dtos.Country
+namespace CourseWork.Application.Dtos.CountryDto
 {
     public class CrudCountryDto
     {

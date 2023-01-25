@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CourseWork.Application.Dtos.Industry;
+using CourseWork.Application.Dtos.IndustryDto;
 using CourseWork.Application.Services.Interfaces;
 using CourseWork.Domain.Models;
 using CourseWork.Persistence.Repositories.Interfaces;

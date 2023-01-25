@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CourseWork.Application.Dtos.Country;
+using CourseWork.Application.Dtos.CountryDto;
 using CourseWork.Application.Services.Interfaces;
 using CourseWork.Domain.Models;
 using CourseWork.Persistence.Repositories.Implementations;
@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 namespace CourseWork.Application.Services.Implementations
 {
     public class CountryService : GenericService<Country>, ICountryService
-    {
-        
+    { 
         public CountryService(ICountryRepository repository, IAppCache cache, IMapper mapper) : base(repository, cache, mapper)
         {
         }

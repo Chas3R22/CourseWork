@@ -1,4 +1,4 @@
-﻿using CourseWork.Application.Dtos.Country;
+﻿using CourseWork.Application.Dtos.CountryDto;
 using CourseWork.Domain.Models;
 using System;
 using System.Collections.Generic;

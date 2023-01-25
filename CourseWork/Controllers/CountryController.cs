@@ -1,4 +1,4 @@
-﻿using CourseWork.Application.Dtos.Country;
+﻿using CourseWork.Application.Dtos.CountryDto;
 using CourseWork.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

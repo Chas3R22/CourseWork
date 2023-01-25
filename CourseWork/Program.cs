@@ -28,6 +28,7 @@ builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
         
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<IIndustryService, IndustryService>();
+builder.Services.AddScoped<IOrganizationService, OrganizationService>();
 
 
 var app = builder.Build();
@@ -42,6 +43,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseExceptionHandler("/error");
 
 app.MapControllers();
 
