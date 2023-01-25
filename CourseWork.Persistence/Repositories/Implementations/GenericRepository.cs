@@ -46,6 +46,19 @@ namespace CourseWork.Persistence.Repositories.Implementations
             await _dbContext.SaveChangesAsync();
         }
 
+        public IEnumerable<T> GetPage(int page, int size)
+        {
+            return _dbContext.Set<T>()
+                .Skip((page - 1) * size)
+                .Take(size);
+        }
+
+        public int GetCount()
+        {
+            return _dbContext.Set<T>().Count();
+        }
+
+
         public async Task<IEnumerable<T>> TakeRecords(int n)
         {
             return await _dbContext.Set<T>().Take(n).ToListAsync();

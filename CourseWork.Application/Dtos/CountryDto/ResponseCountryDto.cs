@@ -8,7 +8,7 @@ namespace CourseWork.Application.Dtos.CountryDto
 {
     public class ResponseCountryDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
-
     }
 }

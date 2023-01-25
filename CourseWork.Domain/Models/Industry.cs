@@ -10,7 +10,7 @@ namespace CourseWork.Domain.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Organization> Products { get; set; }
+        public ICollection<Organization> Organizations { get; set; }
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using CourseWork.Application.Dtos.OrganizationDto;
+﻿using CourseWork.Application.Dtos;
+using CourseWork.Application.Dtos.OrganizationDto;
 using CourseWork.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace CourseWork.Application.Services.Interfaces
         new Task<ResponseOrganizationDto> GetByIdAsync(int id);
         Task<ResponseOrganizationDto> AddAsync(CrudOrganizationDto addDto);
         Task<ResponseOrganizationDto> UpdateAsync(CrudOrganizationDto updateDto, int id);
+        new Task<PagingDto<ResponseOrganizationDto>> GetPage(int page, int size);
     }
 }

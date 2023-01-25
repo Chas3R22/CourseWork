@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CourseWork.Application.Dtos;
 using CourseWork.Application.Dtos.CountryDto;
 using CourseWork.Application.Services.Interfaces;
 using CourseWork.Domain.Models;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 namespace CourseWork.Application.Services.Implementations
 {
     public class CountryService : GenericService<Country>, ICountryService
-    { 
+    {
         public CountryService(ICountryRepository repository, IAppCache cache, IMapper mapper) : base(repository, cache, mapper)
         {
         }
@@ -42,6 +43,24 @@ namespace CourseWork.Application.Services.Implementations
             _mapper.Map(updateDto, country);
             await base.UpdateAsync(country);
             return _mapper.Map<ResponseCountryDto>(country);
+        }
+
+        public new async Task<PagingDto<ResponseCountryDto>> GetPage(int page, int size)
+        {
+            var decimalSize = Convert.ToDecimal(size);
+            var totalElements = GetCount();
+
+            var entities = await base.GetPage(page, size);
+            var paging = new PagingDto<ResponseCountryDto>
+            {
+                Page = page,
+                Size = size,
+                Content = entities.Select(_mapper.Map<ResponseCountryDto>),
+                PageCount = Math.Ceiling(totalElements / decimalSize),
+                TotalElements = totalElements,
+            };
+
+            return paging;
         }
     }
 }

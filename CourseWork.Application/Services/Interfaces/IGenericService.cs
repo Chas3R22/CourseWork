@@ -13,5 +13,7 @@ namespace CourseWork.Application.Services.Interfaces
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task DeleteAsync(int id);
+        Task<IEnumerable<TEntity>> GetPage(int page, int size);
+        int GetCount();
     }
 }

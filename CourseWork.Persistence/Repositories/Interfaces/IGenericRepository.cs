@@ -14,5 +14,7 @@ namespace CourseWork.Persistence.Repositories.Interfaces
         Task DeleteAsync(T entity);
         Task UpdateAsync(T entity);
         Task<IEnumerable<T>> TakeRecords(int n);
+        IEnumerable<T> GetPage(int page, int size);
+        int GetCount();
     }
 }

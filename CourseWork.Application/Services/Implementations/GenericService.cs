@@ -71,5 +71,22 @@ namespace CourseWork.Application.Services.Implementations
             _cache.Add(typeof(TEntity).Name, entities, DateTimeOffset.Now.AddMinutes(10));
             return entities;
         }
+
+        public async Task<IEnumerable<TEntity>> GetPage(int page, int size)
+        {
+            if (page * size > 100)
+            {
+                return _repository.GetPage(page, size);
+            }
+
+            var cached = await GetCached();
+
+            return cached.Skip((page - 1) * size).Take(size);
+        }
+
+        public int GetCount()
+        {
+            return _repository.GetCount();
+        }
     }
 }

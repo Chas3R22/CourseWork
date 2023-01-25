@@ -8,6 +8,7 @@ namespace CourseWork.Application.Dtos.IndustryDto
 {
     public class ResponseIndustryDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
     }

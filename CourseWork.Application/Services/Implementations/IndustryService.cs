@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CourseWork.Application.Dtos;
 using CourseWork.Application.Dtos.IndustryDto;
 using CourseWork.Application.Services.Interfaces;
 using CourseWork.Domain.Models;
@@ -42,6 +43,24 @@ namespace CourseWork.Application.Services.Implementations
             _mapper.Map(updateDto, industry);
             await base.UpdateAsync(industry);
             return _mapper.Map<ResponseIndustryDto>(industry);
+        }
+
+        public new async Task<PagingDto<ResponseIndustryDto>> GetPage(int page, int size)
+        {
+            var decimalSize = Convert.ToDecimal(size);
+            var totalElements = GetCount();
+
+            var entities = await base.GetPage(page, size);
+            var paging = new PagingDto<ResponseIndustryDto>
+            {
+                Page = page,
+                Size = size,
+                Content = entities.Select(_mapper.Map<ResponseIndustryDto>),
+                PageCount = Math.Ceiling(totalElements / decimalSize),
+                TotalElements = totalElements,
+            };
+
+            return paging;
         }
     }
 }

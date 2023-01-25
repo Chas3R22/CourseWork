@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CourseWork.Persistence.Repositories.Interfaces;
 using CourseWork.Application.Dtos.OrganizationDto;
+using CourseWork.Application.Dtos;
 
 namespace CourseWork.Application.Services.Implementations
 {
@@ -68,5 +69,22 @@ namespace CourseWork.Application.Services.Implementations
             organization.Industry = await _industryService.GetEntityByIdAsync(industryId);
         }
 
+        public new async Task<PagingDto<ResponseOrganizationDto>> GetPage(int page, int size)
+        {
+            var decimalSize = Convert.ToDecimal(size);
+            var totalElements = GetCount();
+
+            var entities = await base.GetPage(page, size);
+            var paging = new PagingDto<ResponseOrganizationDto>
+            {
+                Page = page,
+                Size = size,
+                Content = entities.Select(_mapper.Map<ResponseOrganizationDto>),
+                PageCount = Math.Ceiling(totalElements / decimalSize),
+                TotalElements = totalElements,
+            };
+
+            return paging;
+        }
     }
 }

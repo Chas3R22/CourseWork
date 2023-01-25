@@ -15,6 +15,12 @@ namespace CourseWork.Api.Controllers
             _organizationService = organizationService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetPage([FromQuery] int page = 1, [FromQuery] int size = 10)
+        {
+            return Ok(await _organizationService.GetPage(page, size));
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
