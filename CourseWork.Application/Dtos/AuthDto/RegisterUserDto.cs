@@ -11,7 +11,7 @@ namespace CourseWork.Application.Dtos.AuthDto
     {
         [Required(ErrorMessage = "Username required.")]
         [MinLength(3, ErrorMessage = "Username cannot be less than 3 characters.")]
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Password required.")]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#+\-=^_()/\\.,<>""':;])[A-Za-z\d@$!%*?&#+\-=^_()/\\.,<>""':;]{8,}$",

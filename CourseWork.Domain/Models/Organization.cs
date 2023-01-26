@@ -8,6 +8,15 @@ namespace CourseWork.Domain.Models
 {
     public class Organization
     {
+        public Organization()
+        {
+
+        }
+
+        public Organization(string organizationName)
+        {
+            Name = organizationName;
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Website { get; set; }

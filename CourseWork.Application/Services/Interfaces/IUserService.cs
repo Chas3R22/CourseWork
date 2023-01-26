@@ -11,8 +11,8 @@ namespace CourseWork.Application.Services.Interfaces
 {
     public interface IUserService : IGenericService<User>
     {
-        ResponseUserDto CreateAdmin(RegisterUserDto register);
-        new ResponseUserDto GetById(int id);
+        Task<ResponseUserDto> CreateAdmin(RegisterUserDto register);
+        new Task<ResponseUserDto> GetById(int id);
         bool ExistsByUserName(string username);
         User GetByUserName(string username);
         new Task<PagingDto<ResponseUserDto>> GetPage(int page, int size);

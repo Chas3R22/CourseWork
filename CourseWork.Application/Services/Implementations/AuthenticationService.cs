@@ -34,9 +34,9 @@ namespace CourseWork.Application.Services.Implementations
 
         public ResponseUserDto Register(RegisterUserDto register)
         {
-            if (_userService.ExistsByUserName(register.Username))
+            if (_userService.ExistsByUserName(register.UserName))
             {
-                throw new ConflictException("This username is taken!");
+                throw new ConflictException("Username is taken.");
             }
 
             var user = _mapper.Map<RegisterUserDto, User>(register);
@@ -65,19 +65,19 @@ namespace CourseWork.Application.Services.Implementations
 
         private string CreateJwtToken(User user)
         {
-            List<Claim> claims = new List<Claim>
+            var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Role, user.Role.ToString())
             };
 
-            SymmetricSecurityKey key = new SymmetricSecurityKey(
+            var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(
                     _configuration.GetSection("AppSettings:TokenSecret").Value
                     )
                 );
 
-            SigningCredentials credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
                 claims: claims,
@@ -85,7 +85,7 @@ namespace CourseWork.Application.Services.Implementations
                 expires: DateTime.Now.AddHours(1)
                 );
 
-            string jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
+            var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwtToken;
         }

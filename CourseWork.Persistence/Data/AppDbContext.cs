@@ -21,6 +21,24 @@ namespace CourseWork.Persistence.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasData(new User
+                {
+                    Id = 1,
+                    UserName = "AppAdminDefault",
+                    Password = "$2a$12$9fy1u.cHyuRvkQ48zHBfJ.H0aQJRm5EJ2aKS7Ag3tROqVcWpjyp7m",
+                    Role = Role.ADMIN
+                });
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Role)
+                .HasConversion<string>()
+                .HasColumnType("nvarchar(max)");
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserName)
+                .IsUnique();
+
             modelBuilder.Entity<Organization>()
                 .Navigation(o => o.Country)
                 .AutoInclude();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CourseWork.Application.Dtos.AuthDto;
 using CourseWork.Application.Dtos.CountryDto;
 using CourseWork.Application.Dtos.IndustryDto;
 using CourseWork.Application.Dtos.OrganizationDto;
@@ -23,6 +24,9 @@ namespace CourseWork.Application.Mapper
 
             CreateMap<CrudOrganizationDto, Organization>();
             CreateMap<Organization, ResponseOrganizationDto>();
+
+            CreateMap<RegisterUserDto, User>().ConvertUsing(typeof(PasswordHasher));
+            CreateMap<User, ResponseUserDto>();
         }
     }
 }

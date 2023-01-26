@@ -19,29 +19,29 @@ namespace CourseWork.Api.Controllers
 
         [HttpPost]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult CreateAdmin([FromBody] RegisterUserDto register)
+        public async Task<IActionResult> CreateAdmin([FromBody] RegisterUserDto register)
         {
-            return Ok(_userService.CreateAdmin(register));
+            return Ok(await _userService.CreateAdmin(register));
         }
 
         [HttpGet]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult GetAll([FromQuery] int page = 1, [FromQuery] int size = 5)
+        public async Task<IActionResult> GetAll([FromQuery] int page = 1, [FromQuery] int size = 5)
         {
-            return Ok(_userService.GetPage(page, size));
+            return Ok(await _userService.GetPage(page, size));
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return Ok(_userService.GetById(id));
+            return Ok(await _userService.GetById(id));
         }
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "ADMIN")]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            _userService.DeleteAsync(id);
+            await _userService.DeleteAsync(id);
             return NoContent();
         }
     }

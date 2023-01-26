@@ -1,4 +1,5 @@
-﻿using CourseWork.Application.Dtos.CountryDto;
+﻿using CourseWork.Application.Dtos;
+using CourseWork.Application.Dtos.CountryDto;
 using CourseWork.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace CourseWork.Application.Services.Interfaces
         new Task <ResponseCountryDto> GetByIdAsync(int id);
         Task <ResponseCountryDto> AddAsync(CrudCountryDto addDto);
         Task <ResponseCountryDto> UpdateAsync(CrudCountryDto updateDto, int id);
+        new Task<PagingDto<ResponseCountryDto>> GetPage(int page, int size);
     }
 }

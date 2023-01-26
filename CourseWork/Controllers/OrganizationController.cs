@@ -1,5 +1,6 @@
 ﻿using CourseWork.Application.Dtos.OrganizationDto;
 using CourseWork.Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,18 +29,21 @@ namespace CourseWork.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Create([FromBody] CrudOrganizationDto addDto)
         {
             return Ok(await _organizationService.AddAsync(addDto));
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] CrudOrganizationDto updateDto)
         {
             return Ok(await _organizationService.UpdateAsync(updateDto, id));
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ADMIN")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             await _organizationService.DeleteAsync(id);

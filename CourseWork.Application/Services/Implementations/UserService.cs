@@ -25,9 +25,9 @@ namespace CourseWork.Application.Services.Implementations
             _repository = repository;
         }
 
-        public ResponseUserDto CreateAdmin(RegisterUserDto register)
+        public async Task<ResponseUserDto> CreateAdmin(RegisterUserDto register)
         {
-            if (ExistsByUserName(register.Username))
+            if (ExistsByUserName(register.UserName))
             {
                 throw new ConflictException("Username already taken.");
             }
@@ -35,14 +35,14 @@ namespace CourseWork.Application.Services.Implementations
             var user = _mapper.Map<RegisterUserDto, User>(register);
             user.Role = Role.ADMIN;
 
-            AddAsync(user);
+            await AddAsync(user);
 
             return _mapper.Map<ResponseUserDto>(user);
         }
 
-        public new ResponseUserDto GetById(int id)
+        public async new Task<ResponseUserDto> GetById(int id)
         {
-            var user = base.GetByIdAsync(id);
+            var user = await base.GetByIdAsync(id);
 
             return _mapper.Map<ResponseUserDto>(user);
         }

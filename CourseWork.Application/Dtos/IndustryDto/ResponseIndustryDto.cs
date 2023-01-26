@@ -10,6 +10,5 @@ namespace CourseWork.Application.Dtos.IndustryDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
     }
 }

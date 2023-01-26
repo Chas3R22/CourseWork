@@ -8,6 +8,16 @@ namespace CourseWork.Domain.Models
 {
     public class Industry
     {
+        public Industry()
+        {
+
+        }
+
+        public Industry(string industryName)
+        {
+            Name = industryName;
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Organization> Organizations { get; set; }

@@ -96,6 +96,43 @@ namespace CourseWork.Persistence.Migrations
                     b.ToTable("Organizations");
                 });
 
+            modelBuilder.Entity("CourseWork.Domain.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "$2a$12$9fy1u.cHyuRvkQ48zHBfJ.H0aQJRm5EJ2aKS7Ag3tROqVcWpjyp7m",
+                            Role = "ADMIN",
+                            UserName = "AppAdminDefault"
+                        });
+                });
+
             modelBuilder.Entity("CourseWork.Domain.Models.Organization", b =>
                 {
                     b.HasOne("CourseWork.Domain.Models.Country", "Country")
@@ -105,7 +142,7 @@ namespace CourseWork.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("CourseWork.Domain.Models.Industry", "Industry")
-                        .WithMany("Products")
+                        .WithMany("Organizations")
                         .HasForeignKey("IndustryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -122,7 +159,7 @@ namespace CourseWork.Persistence.Migrations
 
             modelBuilder.Entity("CourseWork.Domain.Models.Industry", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Organizations");
                 });
 #pragma warning restore 612, 618
         }

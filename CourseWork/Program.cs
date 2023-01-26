@@ -1,6 +1,5 @@
 using CourseWork.Application.Services.Implementations;
 using CourseWork.Application.Services.Interfaces;
-using CourseWork.Persistence.Data;
 using CourseWork.Persistence.Repositories.Implementations;
 using CourseWork.Persistence.Repositories.Interfaces;
 using DinkToPdf;
@@ -10,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using CourseWork.Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +45,6 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 builder.Services.AddHttpContextAccessor();
 
-//Add security to Swagger
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -73,7 +72,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-//Add authentication to app
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -91,6 +89,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    DbSeeder.SeedDb(context);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
